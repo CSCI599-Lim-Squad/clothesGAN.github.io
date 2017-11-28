@@ -203,6 +203,7 @@
 
                 <h2><span id="introduction">Introduction</span></h2>
 <p>Cycle GAN is a very powerful tool on transfering images between two drastically different sets of images. However, if we generalize the task to similar datasets and more specific task, i.e. people wearing long pants and people wearing short pants, Cycle GAN did not perform as well.</p>
+<p>It is usually believed that in the GAN architecture, the discriminator needs to imporve itself along with the generator in order to give reasonable penalty and hint to the generator. However, in real situations, one of the two components in the network is still having some sort of advantages compare to the other one. Therefore, it is reasonable in this stage to introduce the role of a teacher to the network.</p>
 <p>In our project we tried to introduce the role of an external ‘teacher’, who gives additional hint to the generator or the discriminator to do the task better.</p>
 <h2><span id="our-goal">Our Goal</span></h2>
 <p><strong>What is our goal</strong></p>
@@ -238,7 +239,7 @@
 <p>We used a simple algorithm to detect skin on the picture and then run cycle GAN with this new loss function. The basic idea is that when we transfer from pants to shorts the skin area decreases and grows when going the other way. The new loss function is supposed to be able to give some sort of ‘hint’ to the discriminator on which way to go. Specifically in our model X represents long pants and Y represents short pants.</p>
 <p>The algorithm detects skin area by its RGB value. The condition we used in our model is R&gt;95 and G&gt;40 and B&gt;20. The S function in the above equation represents such classification function.</p>
 <p>We then used experiments to find the value proper for constructing the logits of Y, and we found out that the result achieved by 229 yeilds the best result.</p>
-<p>We had better result with this loss function. However, there are also several disadventages of using this loss function.</p>
+<p>We had better result with this loss function. However, there are also several disadventages of using this loss function. This is a reasonable result since in our case, the task is specific to a certain area of the image. Therefore, it will be easier for the discriminator to improve itself then the generator. Giving some hint to the generator will thus result in better 'cooperation' between the two components.</p>
 <p>The first is that this is a very rough skin detection algorithm and does not give very accurate ‘hint’ to the discriminator. Therefore in some cases the loss function, rather than giving hints, actually confuses the discriminator and generator.</p>
 <p>Another one is that this loss function is too specific to our cases. We are training between pants and shorts, which has the great attribute that skin area changes drastically. If there is no such property for other training pairs, or if this other property is very hard to represent, our method will not work anymore.</p>
 <p><strong>Skin Loss Result</strong></p>
