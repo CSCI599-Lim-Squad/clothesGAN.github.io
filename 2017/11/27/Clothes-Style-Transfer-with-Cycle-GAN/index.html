@@ -241,7 +241,13 @@
 <p>We used a simple algorithm to detect skin on the picture and then run cycle GAN with this new loss function. The basic idea is that when we transfer from pants to shorts the skin area decreases and grows when going the other way. The new loss function is supposed to be able to give some sort of ‘hint’ to the discriminator on which way to go. Specifically in our model X represents long pants and Y represents short pants.</p>
 <p>The algorithm detects skin area by its RGB value. The condition we used in our model is R&gt;95 and G&gt;40 and B&gt;20. The S function in the above equation represents such classification function.</p>
 <p>We then used experiments to find the value proper for constructing the logits of Y, and we found out that the result achieved by 229 yeilds the best result.</p>
+<p><strong>Experiment</strong></p>
 <p>We had better result with this loss function. This is a reasonable result since in our case, the task is specific to a certain area of the image. Therefore, it will be easier for the discriminator to improve itself then the generator. Giving some hint to the generator will thus result in better 'cooperation' between the two components.</p>
+<p><strong>Skin Loss Result</strong></p>
+<p><img src="skin_loss_result.png" alt="Skin Loss Result"></p>
+<p><strong>Skin Loss Training Curves</strong></p>
+<p><img src="skin_train.png" alt="Skin Training Result"></p>
+<p><strong>Discussions</strong></p>
 <p>However, there are also several disadventages of using this loss function. The first is that this is a very rough skin detection algorithm and does not give very accurate ‘hint’ to the discriminator. Therefore in some cases the loss function, rather than giving hints, actually confuses the discriminator and generator.</p>
 <p>Another one is that this loss function is too specific to our cases. We are training between pants and shorts, which has the great attribute that skin area changes drastically. If there is no such property for other training pairs, or if this other property is very hard to represent, our method will not work anymore.</p>
 <p><strong>Skin Loss Result</strong></p>
