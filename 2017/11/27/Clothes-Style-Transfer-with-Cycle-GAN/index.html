@@ -242,7 +242,22 @@
 <p>Another reason for unsatisfactory result is that the area that we want to perform style transfer on is usually too detailed for cycle GAN, which is good at pixel to pixel transfer for two sets of images.</p>
 <p><strong>CycleGAN Result</strong></p>
 <p><img src="cycle_gan_result.png" alt="CycleGAN Result"></p>
-<h3><span id="method-2-the-skin_loss-loss-function-generators-teacher">Method 2: The skin_loss loss function (Generator’s Teacher)</span></h3>
+<h3><span id="method-3-giving-hint-directly-to-the-discriminator-discriminators-teacher">Method 2: Giving hint directly to the discriminator (Discriminator’s Teacher)</span></h3>
+<p><img src="segmentation_graph.jpg" alt="Segmentation CycleGAN"></p>
+<p><strong>Segmentation Generative Loss Function</strong></p>
+<p><img src="segmentation_generative_loss.png" alt="Segmentation Generative Loss"></p>
+<p>Inspired by the encoding-decoding image segmentation algorithm, we introduced the third method that gives hint directly to the discriminator. In the encoding-decoding image segmentation algorithm, whenever the network is unsampling a layer, the original mapping before pooling is also added to the layer. Since during the encoding stage, certain amount of semantic meanings of the original image is preserved, the unsampled layer will preserve more infromation about the image, which helps to make decoding performs better.</p>
+<p>Therefore, in our case we used an image segmentation alroithm to segment our the area that we want the network to focus on, and then changed the input of the discriminator to help discriminator. A sample segmentation output is shown below.</p>
+<p><img src="segmentation_network_result.png" alt="Segmentation Result"></p>
+<p>The Seg function in the equation represents the Segmentation network. It will return a mapping of pants and legs labelled with 1 and otherwise 0 of the original image. Our implementation of segmentation network takes a typlical encoding-decoding architecture and followed the that from the project completed by Jakub Naplava (could be found on <a href="https://github.com/arahusky/Tensorflow-Segmentation" target="_blank" rel="noopener">https://github.com/arahusky/Tensorflow-Segmentation</a>)</p>
+<p>We have also tried another input of the discriminator</p>
+<p><img src="segmentation_formula.png" alt="Segmentation Formula"></p>
+<p>Where I is the original input, S(I) is the segmented map and lambda is a hypervariable.</p>
+<p><strong>Experiments</strong></p>
+<p>This did not turn out to be a great method to do the task. The generated results were even worth than the results without such boost to the discriminator.</p>
+<p><strong>Segmentation Result</strong></p>
+<p><img src="segmentation_result.jpg" alt="Segmentation Result"></p>
+<h3><span id="method-2-the-skin_loss-loss-function-generators-teacher">Method 3: The skin_loss loss function (Generator’s Teacher)</span></h3>
 <p><img src="skin_loss_graph.jpg" alt="Skin Loss CycleGAN"></p>
 <p><strong>Skin Loss Functions</strong></p>
 <p><img src="skin_loss_formula.png" alt="Skin Loss Formula"></p>
@@ -260,21 +275,6 @@
 <p>Although the loss function we had for method two looks specific to the use of long and short pants, we do think that it is possible to generalize the loss to other situations. One thing that supports this hypothesis is the existence of the threshold 229 found by experiment. It is reasonable to believe that in other situations, a different threshold will be able to 'teach' the model better.</p>
 <p>However, there are also several disadventages of using this loss function. The first is that this is a very rough skin detection algorithm and does not give very accurate ‘hint’ to the discriminator. Therefore in some cases the loss function, rather than giving hints, actually confuses the discriminator and generator.</p>
 <p>Another one is that this loss function is too specific to our cases. We are training between pants and shorts, which has the great attribute that skin area changes drastically. If there is no such property for other training pairs, or if this other property is very hard to represent, our method will not work anymore.</p>
-<h3><span id="method-3-giving-hint-directly-to-the-discriminator-discriminators-teacher">Method 3: Giving hint directly to the discriminator (Discriminator’s Teacher)</span></h3>
-<p><img src="segmentation_graph.jpg" alt="Segmentation CycleGAN"></p>
-<p><strong>Segmentation Generative Loss Function</strong></p>
-<p><img src="segmentation_generative_loss.png" alt="Segmentation Generative Loss"></p>
-<p>Inspired by the encoding-decoding image segmentation algorithm, we introduced the third method that gives hint directly to the discriminator. In the encoding-decoding image segmentation algorithm, whenever the network is unsampling a layer, the original mapping before pooling is also added to the layer. Since during the encoding stage, certain amount of semantic meanings of the original image is preserved, the unsampled layer will preserve more infromation about the image, which helps to make decoding performs better.</p>
-<p>Therefore, in our case we used an image segmentation alroithm to segment our the area that we want the network to focus on, and then changed the input of the discriminator to help discriminator. A sample segmentation output is shown below.</p>
-<p><img src="segmentation_network_result.png" alt="Segmentation Result"></p>
-<p>The Seg function in the equation represents the Segmentation network. It will return a mapping of pants and legs labelled with 1 and otherwise 0 of the original image. Our implementation of segmentation network takes a typlical encoding-decoding architecture and followed the that from the project completed by Jakub Naplava (could be found on <a href="https://github.com/arahusky/Tensorflow-Segmentation" target="_blank" rel="noopener">https://github.com/arahusky/Tensorflow-Segmentation</a>)</p>
-<p>We have also tried another input of the discriminator</p>
-<p><img src="segmentation_formula.png" alt="Segmentation Formula"></p>
-<p>Where I is the original input, S(I) is the segmented map and lambda is a hypervariable.</p>
-<p><strong>Experiments</strong></p>
-<p>This did not turn out to be a great method to do the task. The generated results were even worth than the results without such boost to the discriminator.</p>
-<p><strong>Segmentation Result</strong></p>
-<p><img src="segmentation_result.jpg" alt="Segmentation Result"></p>
 <h3><span id="method-4-loss-function-in-more-sophisticated-way-additional-tutoring-for-generator">Method 4: Loss function in more sophisticated way (Additional Tutoring for Generator)</span></h3>
 <p><img src="skin_loss_with_segmentation_graph.jpg" alt="Segmentation &amp;amp; Skin Loss CycleGAN"></p>
 <p><strong>Skin Loss with Segmentation</strong></p>
