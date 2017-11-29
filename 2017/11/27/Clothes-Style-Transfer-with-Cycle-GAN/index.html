@@ -231,7 +231,7 @@
 <h3>Cycle GAN</h3>
 <p>We followed the cycle GAN architecture described in <a href="https://junyanz.github.io/CycleGAN/" target="_blank" rel="noopener">this paper</a>.</p>
 <h3>Segmentation Network</h3>
-<p>We used a encoding - decoding network for segmentation. There are three groups of convolutional layers in the encoding and the decoding part of the network, each consisted of two convolutional layers with batch normalization and relu activation and one max pooling / unsampling layers for encoding / decoding jobs. For the unsampling layer, the input of the corresponding max pooling layer is also added to the output to restore more attribute from the original graph. Below is a summarized graph of the architecture.</p>
+<p>We used a encoding - decoding network for segmentation. There are three groups of convolutional layers in the encoding and the decoding part of the network, each consisted of two convolutional layers with batch normalization and relu activation and one max pooling / unsampling layers for encoding / decoding jobs. For the unsampling layer, the input of the corresponding max pooling layer is also added to the output to restore more attribute from the original graph. Below is a summarized graph of the architecture from <a href = 'https://github.com/arahusky/Tensorflow-Segmentation'>here</a>.</p>
 <p><img src="segmentation_architecture.png" alt="Segmentation Network Architecture"></p>
 <p>The original work on this encoding - decoding network can be found <a href = 'https://github.com/arahusky/Tensorflow-Segmentation'>here</a>.</p>
 <h2><span id="our-methods-and-results">Our methods and results</span></h2>
