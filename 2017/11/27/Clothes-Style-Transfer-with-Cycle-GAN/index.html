@@ -218,7 +218,9 @@
 <h2><span id="our-data">Our data</span></h2>
 <ul>
 <li>Clothes data: In Shop Clothes Retrieval Benchmark by Deep Fashion from CUHK</li>
+<p>There are arround 50000 images in the data set. We selected ~1000 images from the dataset for training for each of the two groups (long and short pants). We used some of the remaining images for testing.</p>
 <li>Segmentation data: HumanParsing Dataset from <a href="https://github.com/lemondan/HumanParsing-Dataset" target="_blank" rel="noopener">https://github.com/lemondan/HumanParsing-Dataset</a></li>
+<p>There are arround 100K data in this dataset. We used ~2500 images for training and 997 for testing.</p>
 </ul>
 <h2><span id="our-code">Our code</span></h2>
 <ul>
@@ -244,6 +246,8 @@
 <p>Another one is that this loss function is too specific to our cases. We are training between pants and shorts, which has the great attribute that skin area changes drastically. If there is no such property for other training pairs, or if this other property is very hard to represent, our method will not work anymore.</p>
 <p><strong>Skin Loss Result</strong></p>
 <p><img src="skin_loss_result.png" alt="Skin Loss Result"></p>
+<p><strong>Skin Loss Training Curves</strong></p>
+<p><img src="skin_train.png" alt="Skin Training Result"></p>
 <h3><span id="method-3-giving-hint-directly-to-the-discriminator-discriminators-teacher">Method 3: Giving hint directly to the discriminator (Discriminator’s Teacher)</span></h3>
 <p><img src="segmentation_graph.jpg" alt="Segmentation CycleGAN"></p>
 <p><strong>Segmentation Generative Loss Function</strong></p>
