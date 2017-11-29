@@ -280,7 +280,8 @@
 <p><img src="skin_loss_with_segmentation.png" alt="Skin Loss with Segmentation"></p>
 <p>This method addresses the first disadvantage mentioned in Method 2. Instead of using a very rough loss function , we used segmentation mapping to differentiate between clothes and skin.</p>
 <p>The Seg function in the equation is similar to that in the previous part. The only difference is that this seg function returns a mapping only to leg exposed to the air.</p>
-<p>The results did not trun out to be better than the results achieved by method 2 in most cases.</p>
+<p><strong>Experiments</strong></p>
+<p>We trained this model with several different value for the threshold in the skin loss function. The results did not trun out to be better than the results achieved by method 2 in most cases.</p>
 <p><strong>Skin Loss with Segmentation Result</strong></p>
 <p><img src="skin_loss_with_segmentation_result.png" alt="Skin Loss with Segmentation"></p>
 <h2><span id="discussions">Discussions</span></h2>
