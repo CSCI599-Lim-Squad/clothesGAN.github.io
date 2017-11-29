@@ -250,10 +250,6 @@
 <p><strong>Discussions</strong></p>
 <p>However, there are also several disadventages of using this loss function. The first is that this is a very rough skin detection algorithm and does not give very accurate ‘hint’ to the discriminator. Therefore in some cases the loss function, rather than giving hints, actually confuses the discriminator and generator.</p>
 <p>Another one is that this loss function is too specific to our cases. We are training between pants and shorts, which has the great attribute that skin area changes drastically. If there is no such property for other training pairs, or if this other property is very hard to represent, our method will not work anymore.</p>
-<p><strong>Skin Loss Result</strong></p>
-<p><img src="skin_loss_result.png" alt="Skin Loss Result"></p>
-<p><strong>Skin Loss Training Curves</strong></p>
-<p><img src="skin_train.png" alt="Skin Training Result"></p>
 <h3><span id="method-3-giving-hint-directly-to-the-discriminator-discriminators-teacher">Method 3: Giving hint directly to the discriminator (Discriminator’s Teacher)</span></h3>
 <p><img src="segmentation_graph.jpg" alt="Segmentation CycleGAN"></p>
 <p><strong>Segmentation Generative Loss Function</strong></p>
@@ -264,6 +260,7 @@
 <p>We have also tried another input of the discriminator</p>
 <p><img src="segmentation_formula.png" alt="Segmentation Formula"></p>
 <p>Where I is the original input, S(I) is the segmented map and lambda is a hypervariable.</p>
+<p><strong>Experiments</strong></p>
 <p>This did not turn out to be a great method to do the task. The generated results were even worth than the results without such boost to the discriminator.</p>
 <p><strong>Segmentation Result</strong></p>
 <p><img src="segmentation_result.jpg" alt="Segmentation Result"></p>
